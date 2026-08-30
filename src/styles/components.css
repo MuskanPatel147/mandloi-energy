@@ -1,0 +1,139 @@
+﻿/* ==========================================================================
+   Mandloi Energy — Reusable Component & Layout Foundation
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Containers & Responsive Wrappers (Fluid Mobile Gutters)
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 480px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+.container-editorial {
+  width: 100%;
+  max-width: var(--container-editorial-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+.container-fluid {
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Section Rhythm & Spacing
+   -------------------------------------------------------------------------- */
+.section-padding {
+  padding-top: clamp(3.5rem, 6vw, 6.5rem);
+  padding-bottom: clamp(3.5rem, 6vw, 6.5rem);
+}
+
+.section-padding-sm {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.section-padding-lg {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons & Interactive Foundation
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 46px;
+  padding: 0.75rem 1.65rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  font-weight: 700;
+  line-height: 1;
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast),
+              border-color var(--transition-fast),
+              transform var(--transition-fast),
+              box-shadow var(--transition-fast);
+  user-select: none;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Primary Button (Solar Brand Gradient) */
+.btn-primary {
+  background: linear-gradient(135deg, #ffa028, #f4a340);
+  color: #080b10;
+  border: 1px solid #ffa028;
+  box-shadow: 0 4px 18px rgba(244, 160, 40, 0.35);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #ffb45a, #ffa028);
+  border-color: #ffb45a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(244, 160, 40, 0.5);
+}
+
+/* Secondary Button (Surface Translucent) */
+.btn-secondary {
+  background: rgba(12, 18, 28, 0.75);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+  background: rgba(20, 28, 40, 0.9);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   Touch Target
+   -------------------------------------------------------------------------- */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}

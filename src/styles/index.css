@@ -1,0 +1,16 @@
+﻿/* ==========================================================================
+   Mandloi Energy — Master Style Registry
+   ========================================================================== */
+
+/* Design Tokens & Reset */
+@import './variables.css';
+@import './global.css';
+@import './components.css';
+@import './animations.css';
+
+/* Component Styles */
+@import './topbar.css';
+@import './navbar.css';
+@import './hero.css';
+@import './spec-card.css';
+@import './info-strip.css';
