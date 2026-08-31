@@ -1,8 +1,9 @@
-﻿import React from 'react';
+import React from 'react';
 import SystemSpecification from './SystemSpecification';
 import InfoStrip from './InfoStrip';
 import { WhatsappFilledIcon } from './Icons';
 import homeBg from '../assets/images/home-bg.png';
+import { handleNavClick } from '../utils/navigation';
 
 export default function Hero() {
   return (
@@ -42,10 +43,18 @@ export default function Hero() {
 
             {/* CTA Buttons (Pill shaped as in reference) */}
             <div className="hero-cta-group">
-              <a href="#quote" className="btn btn-primary hero-btn-primary">
+              <a
+                href="/request-a-quote"
+                className="btn btn-primary hero-btn-primary"
+                onClick={(e) => handleNavClick(e, '/request-a-quote')}
+              >
                 REQUEST A QUOTE →
               </a>
-              <a href="#why-mandloi" className="btn btn-secondary hero-btn-secondary">
+              <a
+                href="#why-mandloi"
+                className="btn btn-secondary hero-btn-secondary"
+                onClick={(e) => handleNavClick(e, '#why-mandloi')}
+              >
                 WHY MANDLOI ENERGY
               </a>
             </div>

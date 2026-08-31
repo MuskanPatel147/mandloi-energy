@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Mandloi Energy — Main Navbar Styles (Precision Reference Match)
    ========================================================================== */
 
@@ -141,6 +141,11 @@
   background: linear-gradient(135deg, #ffb45a, #ffa028) !important;
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(244, 160, 40, 0.4);
+}
+
+.nav-cta-btn.active-cta {
+  box-shadow: 0 0 24px rgba(255, 160, 40, 0.65), 0 4px 18px rgba(244, 160, 40, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
 
 /* Hamburger Toggle (Mobile / Tablet / Narrow-Desktop) */

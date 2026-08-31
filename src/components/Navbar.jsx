@@ -1,16 +1,18 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import TopBar from './TopBar';
 import mandloiLogo from '../assets/logo/mandloi-logo.png';
+import { handleNavClick } from '../utils/navigation';
 
 const NAV_LINKS = [
-  { label: 'HOME', href: '#home', active: true },
-  { label: 'SOLUTIONS', href: '#solutions' },
-  { label: 'PROJECTS', href: '#projects' },
-  { label: 'ABOUT US', href: '#about' },
-  { label: 'CONTACT US', href: '#contact' },
+  { id: 'home', label: 'HOME', href: '/' },
+  { id: 'solutions', label: 'SOLUTIONS', href: '#solutions' },
+  { id: 'projects', label: 'PROJECTS', href: '/projects' },
+  { id: 'about', label: 'ABOUT US', href: '/about' },
+  { id: 'reviews', label: 'REVIEWS', href: '/reviews' },
+  { id: 'contact', label: 'CONTACT US', href: '/contact' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ activePage = 'home' }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -46,7 +48,12 @@ export default function Navbar() {
         <div className="container">
           <nav className="navbar" aria-label="Main Navigation">
             {/* Complete brand logo */}
-            <a href="#home" className="nav-brand" aria-label="Mandloi Energy - Powering Tomorrow">
+            <a
+              href="/"
+              className="nav-brand"
+              aria-label="Mandloi Energy - Powering Tomorrow"
+              onClick={(e) => handleNavClick(e, '/')}
+            >
               <img
                 src={mandloiLogo}
                 alt="Mandloi Energy - Powering Tomorrow"
@@ -56,27 +63,30 @@ export default function Navbar() {
 
             {/* Desktop Navigation Links */}
             <ul className="nav-menu">
-              {NAV_LINKS.map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className={`nav-link ${link.active ? 'active' : ''}`}
-                  >
-                    {link.label}
-                    {link.active && <span className="nav-active-glow" aria-hidden="true" />}
-                  </a>
-                </li>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const isActive = activePage === link.id;
+                return (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      className={`nav-link ${isActive ? 'active' : ''}`}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                    >
+                      {link.label}
+                      {isActive && <span className="nav-active-glow" aria-hidden="true" />}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
 
-            {/* Desktop Actions: Turnkey Badge + Request Quote CTA */}
+            {/* Desktop Actions: Request Quote CTA */}
             <div className="header-actions">
-              <div className="turnkey-badge">
-                <span className="turnkey-dot" />
-                <span>TURNKEY SOLAR SOLUTION</span>
-              </div>
-
-              <a href="#quote" className="btn btn-primary nav-cta-btn">
+              <a
+                href="/request-a-quote"
+                className={`btn btn-primary nav-cta-btn ${activePage === 'quote' ? 'active-cta' : ''}`}
+                onClick={(e) => handleNavClick(e, '/request-a-quote')}
+              >
                 REQUEST A QUOTE →
               </a>
 
@@ -115,32 +125,34 @@ export default function Navbar() {
 
       {/* Mobile Navigation Drawer */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
-        <div className="mobile-turnkey-wrapper">
-          <div className="turnkey-badge">
-            <span className="turnkey-dot" />
-            <span>TURNKEY SOLAR SOLUTION</span>
-          </div>
-        </div>
-
         <ul className="mobile-nav-list">
-          {NAV_LINKS.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                className={`mobile-nav-link ${link.active ? 'active' : ''}`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = activePage === link.id;
+            return (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  className={`mobile-nav-link ${isActive ? 'active' : ''}`}
+                  onClick={(e) => {
+                    setMobileMenuOpen(false);
+                    handleNavClick(e, link.href);
+                  }}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="mobile-cta-wrapper">
           <a
-            href="#quote"
+            href="/request-a-quote"
             className="btn btn-primary mobile-cta"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={(e) => {
+              setMobileMenuOpen(false);
+              handleNavClick(e, '/request-a-quote');
+            }}
           >
             REQUEST A QUOTE →
           </a>

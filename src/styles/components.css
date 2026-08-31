@@ -1,11 +1,15 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Mandloi Energy — Reusable Component & Layout Foundation
+   Standardized Global Horizontal Alignment System
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   1. Containers & Responsive Wrappers (Fluid Mobile Gutters)
+   1. Shared Global Page Container System
+   Standardized horizontal boundaries across all pages & sections:
+   Home, Solutions, Why Mandloi, Process, About, Reviews, Contact, Quote
    -------------------------------------------------------------------------- */
-.container {
+.container,
+.page-container {
   width: 100%;
   max-width: var(--container-max-width);
   margin-left: auto;
@@ -16,21 +20,32 @@
 }
 
 @media (min-width: 480px) {
-  .container {
-    padding-left: 24px;
-    padding-right: 24px;
+  .container,
+  .page-container {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 
 @media (min-width: 768px) {
-  .container {
-    padding-left: 32px;
-    padding-right: 32px;
+  .container,
+  .page-container {
+    padding-left: 28px;
+    padding-right: 28px;
   }
 }
 
-@media (min-width: 1200px) {
-  .container {
+@media (min-width: 1024px) {
+  .container,
+  .page-container {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container,
+  .page-container {
     padding-left: 40px;
     padding-right: 40px;
   }
@@ -41,6 +56,8 @@
   max-width: var(--container-editorial-max-width);
   margin-left: auto;
   margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
   box-sizing: border-box;
 }
 

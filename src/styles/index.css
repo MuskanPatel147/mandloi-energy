@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Mandloi Energy — Master Style Registry
    ========================================================================== */
 
@@ -14,3 +14,12 @@
 @import './hero.css';
 @import './spec-card.css';
 @import './info-strip.css';
+@import './why-mandloi.css';
+@import './solutions.css';
+@import './process.css';
+@import './about.css';
+@import './quote.css';
+@import './reviews.css';
+@import './contact.css';
+@import './projects.css';
+@import './footer.css';

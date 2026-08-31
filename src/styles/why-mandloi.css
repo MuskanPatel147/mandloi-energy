@@ -1,0 +1,388 @@
+/* ==========================================================================
+   Mandloi Energy — Why Mandloi Energy Section Styles
+   Final Visual Refinement Matching "WHY MANDLOI(1).png"
+   ========================================================================== */
+
+.why-mandloi-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #06090e;
+  padding-top: clamp(4.5rem, 6.5vw, 6.75rem);
+  padding-bottom: clamp(5rem, 7vw, 7.5rem);
+  scroll-margin-top: 144px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Background Ambient Top Glow */
+.why-mandloi-ambient-top {
+  position: absolute;
+  top: -90px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  max-width: 100%;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(255, 160, 40, 0.12) 0%, rgba(255, 160, 40, 0) 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: var(--z-base);
+}
+
+.why-mandloi-content-wrapper {
+  position: relative;
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Header Block (Badge + 2-Line Heading + Subtitle)
+   -------------------------------------------------------------------------- */
+.why-mandloi-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(3.25rem, 5.5vw, 4.75rem);
+  max-width: 840px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 2. Top Badge */
+.why-mandloi-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 1.15rem;
+  border-radius: 9999px;
+  background: rgba(8, 24, 38, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.15);
+  margin-bottom: 1.15rem;
+}
+
+.why-mandloi-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.why-mandloi-badge-text {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #38bdf8;
+}
+
+/* 3. Main 2-Line Heading */
+.why-mandloi-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(2.35rem, 4.2vw, 3.85rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0 0 1.35rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.why-mandloi-heading-line1 {
+  color: #ffffff;
+  display: block;
+}
+
+.why-mandloi-heading-line2 {
+  color: #ffa028;
+  display: block;
+  text-shadow: 0 0 24px rgba(255, 160, 40, 0.25);
+}
+
+/* 4. Subtitle */
+.why-mandloi-subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(0.975rem, 1.15vw, 1.075rem);
+  line-height: 1.65;
+  color: #c5cdd4;
+  max-width: 740px;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   5. Feature Grid (3 Columns x 3 Rows on Desktop)
+   -------------------------------------------------------------------------- */
+.why-mandloi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 6. Card Design & Spacious Proportions */
+.why-card {
+  position: relative;
+  background: rgba(10, 15, 24, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border-color, rgba(255, 255, 255, 0.12));
+  border-radius: 22px;
+  padding: 2.1rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              border-color var(--transition-base),
+              background-color var(--transition-base);
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 240px;
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 28px var(--card-glow, rgba(56, 189, 248, 0.25));
+  border-color: var(--card-hover-border, #38bdf8);
+  background: rgba(14, 22, 34, 0.85);
+}
+
+/* Cyan Glowing Border on Active/Key Cards */
+.why-card-glow-cyan {
+  --card-border-color: rgba(56, 189, 248, 0.35);
+  --card-hover-border: #38bdf8;
+  --card-glow: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35), 0 0 20px rgba(56, 189, 248, 0.12);
+}
+
+/* Orange Glowing Border on Active/Key Cards */
+.why-card-glow-orange {
+  --card-border-color: rgba(255, 160, 40, 0.35);
+  --card-hover-border: #ffa028;
+  --card-glow: rgba(255, 160, 40, 0.35);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.35), 0 0 20px rgba(255, 160, 40, 0.12);
+}
+
+/* Card Header (Icon Box + Tag/Index) */
+.why-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+/* 7. Rounded Square Icon Container */
+.why-card-icon-container {
+  width: 58px;
+  height: 58px;
+  min-width: 58px;
+  border-radius: 16px;
+  background: var(--icon-bg, rgba(56, 189, 248, 0.1));
+  border: 1.5px solid var(--icon-border, rgba(56, 189, 248, 0.3));
+  box-shadow: 0 0 16px var(--icon-glow, rgba(56, 189, 248, 0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.why-card:hover .why-card-icon-container {
+  transform: scale(1.06);
+  box-shadow: 0 0 24px var(--icon-glow, rgba(56, 189, 248, 0.35));
+}
+
+.why-icon-cyan {
+  --icon-bg: rgba(56, 189, 248, 0.1);
+  --icon-border: rgba(56, 189, 248, 0.4);
+  --icon-glow: rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+}
+
+.why-icon-orange {
+  --icon-bg: rgba(255, 160, 40, 0.1);
+  --icon-border: rgba(255, 160, 40, 0.4);
+  --icon-glow: rgba(255, 160, 40, 0.25);
+  color: #ffa028;
+}
+
+/* Card Number Tag */
+.why-card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #8fa9b8;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 8. Card Title (Clean & Distinct) */
+.why-card-title {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: #ffffff;
+  margin: 0 0 0.85rem 0;
+  line-height: 1.35;
+  transition: color var(--transition-fast);
+}
+
+.why-card:hover .why-card-title {
+  color: #ffffff;
+}
+
+/* Card Title Highlight */
+.why-card-title.accent-orange {
+  color: #ffa028;
+}
+
+.why-card-title.accent-cyan {
+  color: #38bdf8;
+}
+
+/* 9. Card Description */
+.why-card-description {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #c5cdd4;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1279px) {
+  .why-mandloi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 1159px) {
+  .why-mandloi-section {
+    scroll-margin-top: 122px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .why-mandloi-section {
+    padding-top: 3.75rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .why-mandloi-header {
+    margin-bottom: 2.75rem;
+  }
+
+  .why-mandloi-heading {
+    font-size: clamp(2rem, 5vw, 2.75rem);
+  }
+
+  .why-card {
+    padding: 1.75rem 1.65rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .why-mandloi-section {
+    padding-top: 3rem;
+    padding-bottom: 3.75rem;
+    scroll-margin-top: 112px;
+  }
+
+  .why-mandloi-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .why-mandloi-heading {
+    font-size: clamp(1.85rem, 6.5vw, 2.35rem);
+  }
+
+  .why-mandloi-subtitle {
+    font-size: 0.9375rem;
+  }
+
+  .why-mandloi-grid {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .why-card {
+    padding: 1.5rem 1.4rem;
+    min-height: auto;
+    border-radius: 18px;
+  }
+
+  .why-card-header {
+    margin-bottom: 1.2rem;
+  }
+
+  .why-card-icon-container {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+  }
+
+  .why-card-title {
+    font-size: 1.05rem;
+  }
+
+  .why-card-description {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .why-mandloi-section {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .why-mandloi-heading {
+    font-size: 1.6rem;
+  }
+
+  .why-card {
+    padding: 1.25rem 1.15rem;
+  }
+
+  .why-card-icon-container {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+  }
+
+  .why-card-title {
+    font-size: 0.98rem;
+  }
+
+  .why-card-description {
+    font-size: 0.8125rem;
+  }
+}
