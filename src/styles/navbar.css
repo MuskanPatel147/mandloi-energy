@@ -1,0 +1,330 @@
+/* ==========================================================================
+   Mandloi Energy — Main Navbar Styles (Precision Reference Match)
+   ========================================================================== */
+
+.site-header-wrapper {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  z-index: var(--z-header);
+  box-sizing: border-box;
+}
+
+.main-navbar-bar {
+  background: rgba(6, 10, 16, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* 3. Brand Logo — Proportional Height */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  height: 82px;
+  width: auto;
+  max-width: 250px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Desktop Navigation Menu (Active on >=1160px) */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2.75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c5cdd4;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  position: relative;
+  transition: color var(--transition-fast);
+  white-space: nowrap; /* Prevent multi-line label breaking */
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+.nav-link.active {
+  color: #ffa028;
+}
+
+.nav-active-glow {
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: #ffa028;
+  box-shadow: 0 0 10px #ffa028, 0 0 20px #ffa028;
+  border-radius: 2px;
+}
+
+/* Header Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Turnkey Solution Pill Badge */
+.turnkey-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  background: rgba(8, 24, 38, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #38bdf8;
+  white-space: nowrap;
+}
+
+.turnkey-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #ffa028;
+  box-shadow: 0 0 6px #ffa028;
+}
+
+/* Navbar CTA Button */
+.nav-cta-btn {
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, #ffa028, #f4a340) !important;
+  color: #080b10 !important;
+  font-weight: 700 !important;
+  font-size: 0.875rem !important;
+  letter-spacing: 0.04em !important;
+  padding: 0.75rem 1.75rem !important;
+  box-shadow: 0 4px 18px rgba(244, 160, 40, 0.35);
+  white-space: nowrap;
+}
+
+.nav-cta-btn:hover {
+  background: linear-gradient(135deg, #ffb45a, #ffa028) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(244, 160, 40, 0.4);
+}
+
+.nav-cta-btn.active-cta {
+  box-shadow: 0 0 24px rgba(255, 160, 40, 0.65), 0 4px 18px rgba(244, 160, 40, 0.4) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Hamburger Toggle (Mobile / Tablet / Narrow-Desktop) */
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  color: #ffffff;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.nav-toggle:hover {
+  background: var(--surface-elevated);
+  border-color: var(--border-medium);
+}
+
+/* Mobile Drawer Overlay & Panel */
+.mobile-menu-overlay {
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints:
+   Switches cleanly to hamburger navigation at <=1159px where full desktop
+   nav cannot fit without cramping, label wrapping, or CTA clipping.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1159px) {
+  .navbar {
+    height: 78px;
+  }
+
+  .brand-logo {
+    height: 64px;
+    max-width: 190px;
+  }
+
+  .nav-menu,
+  .header-actions .turnkey-badge,
+  .header-actions .nav-cta-btn {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .mobile-menu-overlay {
+    display: block;
+    position: fixed;
+    top: 122px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 122px);
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: calc(var(--z-header) - 1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+  }
+
+  .mobile-menu-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 122px;
+    left: 0;
+    width: 100%;
+    max-height: calc(100vh - 122px);
+    overflow-y: auto;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-medium);
+    padding: var(--space-6) var(--space-5) var(--space-8);
+    z-index: var(--z-header);
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform var(--transition-base), opacity var(--transition-base);
+    box-shadow: var(--shadow-lg);
+    box-sizing: border-box;
+  }
+
+  .mobile-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-turnkey-wrapper {
+    margin-bottom: var(--space-4);
+    display: flex;
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-6) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 var(--space-4);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+    white-space: nowrap;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:active {
+    background-color: var(--surface);
+    color: #ffffff;
+  }
+
+  .mobile-nav-link.active {
+    background-color: var(--accent-subtle);
+    color: var(--accent-primary);
+  }
+
+  .mobile-cta-wrapper {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .mobile-cta {
+    width: 100%;
+    text-align: center;
+    border-radius: 9999px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    height: 68px;
+  }
+
+  .brand-logo {
+    height: 50px;
+    max-width: 150px;
+  }
+
+  .mobile-menu-overlay,
+  .mobile-menu {
+    top: 112px;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand-logo {
+    height: 44px;
+    max-width: 130px;
+  }
+}

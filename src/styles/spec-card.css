@@ -1,0 +1,217 @@
+﻿/* ==========================================================================
+   Mandloi Energy — System Specification Card Styles (~590px Width Reference Match)
+   ========================================================================== */
+
+.spec-card {
+  width: 100%;
+  max-width: 590px;
+  min-width: 0;
+  background: rgba(10, 16, 26, 0.42);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  padding: 2.1rem 2.5rem;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.spec-card:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.45);
+}
+
+/* Card Header */
+.spec-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-bottom: 1.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 0.35rem;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.spec-card-title {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+}
+
+.spec-card-badge {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+/* Card Body Rows */
+.spec-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0.25rem;
+}
+
+.spec-label-col {
+  display: flex;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.spec-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  line-height: 1.4;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.spec-value-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.spec-value {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.35;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.spec-detail {
+  font-family: var(--font-sans);
+  font-size: 0.825rem;
+  color: #8fa9b8;
+  line-height: 1.45;
+  margin-top: 0.2rem;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* Responsive Card Rules */
+@media (max-width: 991px) {
+  .spec-card {
+    padding: 1.6rem 1.75rem;
+    max-width: 100%;
+  }
+
+  .spec-row {
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .spec-card {
+    padding: 1.25rem 1rem;
+    border-radius: 18px;
+    max-width: 100%;
+  }
+
+  .spec-card-header {
+    padding-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .spec-card-title {
+    font-size: 0.8125rem;
+  }
+
+  .spec-card-badge {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .spec-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    padding: 0.75rem 0;
+  }
+
+  .spec-label {
+    font-size: 0.6875rem;
+  }
+
+  .spec-value {
+    font-size: 0.875rem;
+  }
+
+  .spec-detail {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .spec-card {
+    padding: 1rem 0.75rem;
+    border-radius: 14px;
+  }
+
+  .spec-card-title {
+    font-size: 0.75rem;
+  }
+
+  .spec-card-badge {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .spec-label {
+    font-size: 0.65rem;
+  }
+
+  .spec-value {
+    font-size: 0.8125rem;
+  }
+
+  .spec-detail {
+    font-size: 0.7rem;
+  }
+}

@@ -1,0 +1,376 @@
+/* ==========================================================================
+   Mandloi Energy — Solutions Section Styles
+   Precision Size & Proportion Match to Approved Reference
+   ========================================================================== */
+
+.solutions-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #06090e;
+  padding-top: clamp(2.5rem, 3.8vw, 3.75rem);
+  padding-bottom: clamp(2.5rem, 3.8vw, 3.5rem);
+  scroll-margin-top: 144px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Background Photographic Header Banner */
+.solutions-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: var(--z-base);
+  pointer-events: none;
+}
+
+.solutions-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+  opacity: 0.45;
+  display: block;
+}
+
+.solutions-backdrop-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, rgba(6, 9, 14, 0.96) 0%, rgba(6, 9, 14, 0.88) 45%, rgba(6, 9, 14, 0.35) 80%, rgba(6, 9, 14, 0.75) 100%),
+              linear-gradient(to bottom, rgba(6, 9, 14, 0.25) 0%, rgba(6, 9, 14, 0.85) 75%, #06090e 100%);
+}
+
+.solutions-content-wrapper {
+  position: relative;
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Header Block (Compact Left-Aligned Hierarchy)
+   -------------------------------------------------------------------------- */
+.solutions-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 560px;
+  margin-bottom: clamp(1.75rem, 2.8vw, 2.5rem);
+  box-sizing: border-box;
+}
+
+/* Top Label Badge */
+.solutions-badge {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+/* Main Heading */
+.solutions-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(2.2rem, 3.5vw, 3.35rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0 0 0.85rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.solutions-heading-line1 {
+  color: #ffffff;
+  display: block;
+}
+
+.solutions-heading-line2 {
+  color: #ffa028;
+  display: block;
+  text-shadow: 0 0 24px rgba(255, 160, 40, 0.25);
+}
+
+/* Description */
+.solutions-description {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #c5cdd4;
+  margin: 0;
+  max-width: 480px;
+}
+
+/* --------------------------------------------------------------------------
+   4-Card Solutions Grid (Compact & Dense in 1 Row on Desktop)
+   -------------------------------------------------------------------------- */
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Individual Card Styling */
+.solution-card {
+  position: relative;
+  background: rgba(8, 14, 22, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--sol-border, rgba(255, 255, 255, 0.14));
+  border-radius: 18px;
+  padding: 1.25rem 1.15rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  transition: transform var(--transition-base),
+              box-shadow var(--transition-base),
+              border-color var(--transition-base);
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.solution-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.55), 0 0 22px var(--sol-glow, rgba(255, 160, 40, 0.25));
+  border-color: var(--sol-accent, #ffa028);
+}
+
+/* Circular Icon Badge */
+.solution-card-icon-container {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 50%;
+  border: 1.5px solid var(--sol-icon-border, #38bdf8);
+  background: var(--sol-icon-bg, rgba(56, 189, 248, 0.1));
+  box-shadow: 0 0 16px var(--sol-icon-glow, rgba(56, 189, 248, 0.2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.solution-card:hover .solution-card-icon-container {
+  transform: scale(1.06);
+  box-shadow: 0 0 20px var(--sol-accent, #ffa028);
+}
+
+/* Card Title */
+.solution-card-title {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sol-accent, #38bdf8);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.3;
+}
+
+/* Card Preview Image */
+.solution-card-img-wrapper {
+  width: 100%;
+  height: 105px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #0c121c;
+  flex-shrink: 0;
+}
+
+.solution-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-base);
+}
+
+.solution-card:hover .solution-card-img {
+  transform: scale(1.04);
+}
+
+/* Card Description */
+.solution-card-description {
+  font-family: var(--font-sans);
+  font-size: 0.78125rem;
+  line-height: 1.45;
+  color: #c5cdd4;
+  margin: 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+/* --------------------------------------------------------------------------
+   Bottom Transition Navigation (--- HOW IT WORKS --- + Down Arrow)
+   -------------------------------------------------------------------------- */
+.solutions-footer-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: clamp(2rem, 3.2vw, 3rem);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.solutions-nav-label-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 460px;
+}
+
+.solutions-nav-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(56, 189, 248, 0.45));
+}
+
+.solutions-nav-line.right {
+  background: linear-gradient(to left, transparent, rgba(56, 189, 248, 0.45));
+}
+
+.solutions-nav-text {
+  font-family: var(--font-sans);
+  font-size: 0.78125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.solutions-down-arrow-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid #ffa028;
+  background: rgba(14, 20, 30, 0.85);
+  color: #ffa028;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.65rem;
+  box-shadow: 0 0 12px rgba(255, 160, 40, 0.25);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.solutions-down-arrow-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 0 18px rgba(255, 160, 40, 0.6);
+  background-color: rgba(255, 160, 40, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1159px) {
+  .solutions-section {
+    scroll-margin-top: 122px;
+  }
+
+  .solutions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.35rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .solutions-section {
+    padding-top: 3rem;
+    padding-bottom: 3.5rem;
+    scroll-margin-top: 112px;
+    min-height: auto;
+  }
+
+  .solutions-header {
+    margin-bottom: 2rem;
+  }
+
+  .solutions-heading {
+    font-size: clamp(1.85rem, 6.5vw, 2.35rem);
+  }
+
+  .solutions-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .solution-card {
+    padding: 1.35rem 1.25rem 1.25rem;
+    border-radius: 16px;
+  }
+
+  .solution-card-img-wrapper {
+    height: 135px;
+  }
+}
+
+@media (max-width: 360px) {
+  .solutions-section {
+    padding-top: 2.25rem;
+    padding-bottom: 2.75rem;
+  }
+
+  .solutions-badge {
+    font-size: 0.72rem;
+  }
+
+  .solutions-heading {
+    font-size: 1.55rem;
+  }
+
+  .solutions-description {
+    font-size: 0.875rem;
+  }
+
+  .solution-card {
+    padding: 1.15rem 0.95rem 1rem;
+  }
+
+  .solution-card-icon-container {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+  }
+
+  .solution-card-title {
+    font-size: 0.78125rem;
+  }
+
+  .solution-card-img-wrapper {
+    height: 110px;
+  }
+
+  .solution-card-description {
+    font-size: 0.75rem;
+  }
+}

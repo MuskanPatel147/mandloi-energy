@@ -1,0 +1,99 @@
+﻿:root {
+  /* ==========================================================================
+     Mandloi Energy — Design System Tokens (Precision Reference Match)
+     ========================================================================== */
+
+  /* Typography System */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Fluid Font Sizes */
+  --text-display: clamp(2.5rem, 5.5vw + 1rem, 5rem);
+  --text-h1: clamp(2.35rem, 3.8vw, 3.85rem);
+  --text-h2: clamp(1.75rem, 2.8vw + 0.5rem, 2.75rem);
+  --text-h3: clamp(1.35rem, 1.8vw + 0.4rem, 1.85rem);
+  --text-h4: clamp(1.15rem, 1.2vw + 0.3rem, 1.4rem);
+  --text-body-lg: 1.05rem;
+  --text-body: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-caption: 0.75rem;
+
+  /* Line Heights */
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.68;
+  --leading-relaxed: 1.75;
+
+  /* Color System — Dark Corporate & Solar Energy Palette */
+  --bg-primary: #06090e;
+  --bg-secondary: #0a0f16;
+  --surface: #0e1622;
+  --surface-elevated: #15202e;
+  --surface-highlight: #1e2c3d;
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #c5cdd4;
+  --text-muted: #94a3b8;
+  --text-inverse: #080b10;
+
+  /* Brand Solar Accent System */
+  --accent-primary: #ffa028;
+  --accent-hover: #ffb45a;
+  --accent-active: #e68d1a;
+  --accent-subtle: rgba(255, 160, 40, 0.12);
+  --accent-glow: rgba(255, 160, 40, 0.35);
+
+  /* Technical / Corporate Support Color */
+  --technical: #8fa9b8;
+  --technical-subtle: rgba(143, 169, 184, 0.12);
+
+  /* Border System */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.22);
+  --border-accent: rgba(255, 160, 40, 0.35);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* 1. Layout Widths — Generous Widescreen Span (Matching Reference) */
+  --container-max-width: 1760px;
+  --container-editorial-max-width: 840px;
+
+  /* Border Radius */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Z-Index Hierarchy */
+  --z-base: 0;
+  --z-content: 10;
+  --z-overlay: 20;
+  --z-floating: 30;
+  --z-header: 40;
+  --z-modal: 50;
+
+  /* Transitions */
+  --ease-out-cubic: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 150ms var(--ease-out-cubic);
+  --transition-base: 250ms var(--ease-out-cubic);
+  --transition-smooth: 400ms var(--ease-out-cubic);
+}
