@@ -23,12 +23,17 @@ export default function ProjectsSection() {
   const [partnersRevealed, setPartnersRevealed] = useState(false);
   const [showcaseRevealed, setShowcaseRevealed] = useState(false);
   const [ctaRevealed, setCtaRevealed] = useState(false);
+  const [activePartnerIndex, setActivePartnerIndex] = useState(0);
 
   const heroRef = useRef(null);
   const partnersRef = useRef(null);
   const showcaseRef = useRef(null);
   const ctaRef = useRef(null);
+  const partnersGridRef = useRef(null);
+  const isUserInteracting = useRef(false);
+  const autoScrollTimer = useRef(null);
 
+  // 1. Scroll Reveal Observers
   useEffect(() => {
     const observerOptions = { threshold: 0.12 };
 
@@ -62,6 +67,65 @@ export default function ProjectsSection() {
       showcaseObs.disconnect();
       ctaObs.disconnect();
       clearTimeout(timer);
+    };
+  }, []);
+
+  // 2. Mobile Touch / Swipe Scroll-Tracking
+  const handlePartnersScroll = () => {
+    if (!partnersGridRef.current || window.innerWidth > 768) return;
+    const el = partnersGridRef.current;
+    const scrollLeft = el.scrollLeft;
+    const firstChild = el.children[0];
+    if (!firstChild) return;
+    const cardWidth = firstChild.offsetWidth + 16;
+    const newIdx = Math.round(scrollLeft / cardWidth);
+    if (newIdx >= 0 && newIdx < PARTNERS_DATA.length && newIdx !== activePartnerIndex) {
+      setActivePartnerIndex(newIdx);
+    }
+  };
+
+  const scrollToPartner = (idx) => {
+    if (!partnersGridRef.current) return;
+    const el = partnersGridRef.current;
+    const card = el.children[idx];
+    if (card) {
+      const leftPos = card.offsetLeft - (el.offsetWidth - card.offsetWidth) / 2;
+      el.scrollTo({ left: Math.max(0, leftPos), behavior: 'smooth' });
+      setActivePartnerIndex(idx);
+    }
+  };
+
+  const handleTouchStart = () => {
+    isUserInteracting.current = true;
+  };
+
+  const handleTouchEnd = () => {
+    setTimeout(() => {
+      isUserInteracting.current = false;
+    }, 3500);
+  };
+
+  // 3. Optional Mobile Auto-Rotation (4.5s Interval)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const startAutoTimer = () => {
+      if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
+      autoScrollTimer.current = setInterval(() => {
+        if (window.innerWidth > 768 || isUserInteracting.current || !partnersGridRef.current) return;
+        setActivePartnerIndex((prev) => {
+          const next = (prev + 1) % PARTNERS_DATA.length;
+          scrollToPartner(next);
+          return next;
+        });
+      }, 4500);
+    };
+
+    startAutoTimer();
+
+    return () => {
+      if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
     };
   }, []);
 
@@ -126,11 +190,20 @@ export default function ProjectsSection() {
             <span className="section-divider-line right anim-line-right" aria-hidden="true" />
           </div>
 
-          <div className="projects-partners-grid">
+          {/* Cards Grid on Desktop / Smooth Horizontal Carousel on Mobile */}
+          <div
+            ref={partnersGridRef}
+            className="projects-partners-grid"
+            onScroll={handlePartnersScroll}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            role="region"
+            aria-label="Previous Projects Cards"
+          >
             {PARTNERS_DATA.map((partner, idx) => (
               <article
                 key={partner.id}
-                className="partner-card anim-partner-card"
+                className={`partner-card anim-partner-card ${activePartnerIndex === idx ? 'mobile-active' : ''}`}
                 style={{ '--partner-idx': idx }}
                 aria-label={`Project: ${partner.name}`}
               >
@@ -145,6 +218,7 @@ export default function ProjectsSection() {
                           alt="Nayara Energy"
                           className="trio-logo-nayara"
                           loading="lazy"
+                          decoding="async"
                         />
                       </div>
 
@@ -163,6 +237,7 @@ export default function ProjectsSection() {
                           alt="Hindustan Petroleum"
                           className="trio-logo-hp"
                           loading="lazy"
+                          decoding="async"
                         />
                       </div>
                     </div>
@@ -200,6 +275,21 @@ export default function ProjectsSection() {
               </article>
             ))}
           </div>
+
+          {/* Mobile Pagination Dot Indicators (<= 768px only) */}
+          <div className="partners-mobile-dots" role="tablist" aria-label="Project cards navigation">
+            {PARTNERS_DATA.map((p, idx) => (
+              <button
+                key={p.id}
+                type="button"
+                className={`partners-dot-btn ${activePartnerIndex === idx ? 'is-active' : ''}`}
+                onClick={() => scrollToPartner(idx)}
+                aria-label={`Go to project ${idx + 1}: ${p.name}`}
+                aria-selected={activePartnerIndex === idx}
+                role="tab"
+              />
+            ))}
+          </div>
         </div>
 
         {/* ================================================================
@@ -226,15 +316,17 @@ export default function ProjectsSection() {
                 style={{ '--showcase-idx': idx }}
                 aria-label={item.title}
               >
-                {/* Preview Image */}
+                {/* Preview Image with Continuous Automatic Sunlight Sweep */}
                 <div className="showcase-img-wrapper">
                   <img
                     src={item.image}
                     alt={item.title}
                     className="showcase-img"
                     loading="lazy"
+                    decoding="async"
                   />
                   <div className="showcase-img-overlay" aria-hidden="true" />
+                  <div className="showcase-sun-beam" aria-hidden="true" />
                   <div className="showcase-icon-badge" aria-hidden="true">
                     {item.iconType === 'home' && <HomeProjectIcon size={20} />}
                     {item.iconType === 'industrial' && <FactoryProjectIcon size={20} />}
@@ -266,36 +358,34 @@ export default function ProjectsSection() {
         </div>
 
         {/* ================================================================
-            Section 4: Call To Action Banner
+            Section 4: Consultation CTA Banner
             ================================================================ */}
         <div
           ref={ctaRef}
-          className={`projects-cta-banner ${ctaRevealed ? 'is-revealed' : ''}`}
+          className={`projects-cta-banner-wrapper anim-cta-banner ${ctaRevealed ? 'is-revealed' : ''}`}
         >
-          <div className="projects-cta-left">
-            <div className="projects-cta-icon-box anim-cta-icon" aria-hidden="true">
-              <CtaSunSolarIcon size={46} color="#ffa028" />
-            </div>
-            <div className="projects-cta-text-group anim-cta-text">
-              <h3 className="projects-cta-heading">Have a Solar Project in Mind?</h3>
-              <p className="projects-cta-subtitle">
-                Let's build a customized solar solution that meets your energy needs and budget.
+          <div className="projects-cta-banner">
+            <div className="projects-cta-content">
+              <div className="projects-cta-badge">
+                <CtaSunSolarIcon size={16} />
+                <span>CLEAN ENERGY PARTNERSHIP</span>
+              </div>
+              <h3 className="projects-cta-heading">
+                Ready to Power Your Facility with Solar?
+              </h3>
+              <p className="projects-cta-desc">
+                From initial feasibility study and structural design to seamless commissioning and net metering, our solar engineering team delivers dependable systems engineered for maximum yield.
               </p>
             </div>
-          </div>
 
-          <div className="projects-cta-right anim-cta-action">
-            <a
-              href="/request-a-quote"
-              className="btn btn-primary projects-cta-btn"
-              aria-label="Request a Solar Project Quote"
-            >
-              <span>REQUEST A QUOTE</span>
-              <span className="cta-arrow-shift" aria-hidden="true">→</span>
-            </a>
-            <div className="projects-cta-trust-badge">
-              <ShieldTrustIcon size={15} color="#38bdf8" />
-              <span>Trusted by Businesses & Homes Across India</span>
+            <div className="projects-cta-action">
+              <a
+                href="/request-a-quote"
+                className="btn btn-primary projects-cta-btn"
+                aria-label="Request a customized quote for your solar installation"
+              >
+                REQUEST A QUOTE →
+              </a>
             </div>
           </div>
         </div>

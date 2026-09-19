@@ -1,25 +1,39 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 import { QuoteCyanIcon, StarFilledIcon } from './ReviewsIcons';
 
-export default function ReviewCard({ review, widthStyle, isCenter = false, isAnimating = false }) {
+function ReviewCardComponent({ review, widthStyle, isCenter = false, isAnimating = false }) {
   const { name, location, rating = 5, text, category, source = 'Customer Feedback' } = review;
   const cardRef = useRef(null);
+  const rafId = useRef(null);
 
   // Desktop 3D Cursor Tilt Interaction (Max ±2.5 deg)
   const handleMouseMove = (e) => {
     if (!cardRef.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth < 1024) {
       return;
     }
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
-    const rotY = (x * 5).toFixed(2); // Max ±2.5 deg
-    const rotX = (-y * 5).toFixed(2); // Max ±2.5 deg
+    if (rafId.current) return;
 
-    cardRef.current.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    rafId.current = requestAnimationFrame(() => {
+      rafId.current = null;
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = (clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+      const y = (clientY - rect.top) / rect.height - 0.5; // -0.5 to 0.5
+      const rotY = (x * 5).toFixed(2); // Max ±2.5 deg
+      const rotX = (-y * 5).toFixed(2); // Max ±2.5 deg
+
+      cardRef.current.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+    });
   };
 
   const handleMouseLeave = () => {
+    if (rafId.current) {
+      cancelAnimationFrame(rafId.current);
+      rafId.current = null;
+    }
     if (!cardRef.current) return;
     cardRef.current.style.transform = '';
   };
@@ -79,3 +93,5 @@ export default function ReviewCard({ review, widthStyle, isCenter = false, isAni
     </article>
   );
 }
+
+export default memo(ReviewCardComponent);

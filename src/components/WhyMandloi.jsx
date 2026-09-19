@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import WhyMandloiGrid from './WhyMandloiGrid';
 import { SunBadgeIcon } from './WhyMandloiIcons';
+import WhyMandloiSolar3D from './WhyMandloiSolar3D';
 
 /**
  * WhyMandloi Component
- * Full section matching the controlling reference with staggered scroll-reveal animations
+ * Features real-time 3D WebGL clean-energy moving environment layer
+ * with continuous automatic motion, ambient depth, and staggered card reveals.
  */
 export default function WhyMandloi() {
   const [revealed, setRevealed] = useState(false);
@@ -40,10 +42,13 @@ export default function WhyMandloi() {
       id="why-mandloi"
       aria-labelledby="why-mandloi-title"
     >
+      {/* Real-time 3D WebGL Moving Solar Atmosphere */}
+      <WhyMandloiSolar3D />
+
       {/* Top Ambient Glow Effect with slow subtle drift */}
       <div className="why-mandloi-ambient-top" aria-hidden="true" />
 
-      <div className="container why-mandloi-content-wrapper">
+      <div className="container why-mandloi-content-wrapper" style={{ position: 'relative', zIndex: 1 }}>
         {/* Header Block with Scroll-Reveal Animation */}
         <div className="why-mandloi-header anim-why-header">
           {/* 2. Top Badge */}

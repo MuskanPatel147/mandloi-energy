@@ -1,25 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import mandloiLogo from '../assets/logo/mandloi-logo.png';
-import { PhoneIcon, WhatsappIcon, MailIcon, GlobeIcon, InstagramIcon } from './Icons';
+import { PhoneIcon, WhatsappIcon, MailIcon, GlobeIcon } from './Icons';
 import { handleNavClick } from '../utils/navigation';
-
-export function FacebookIcon({ size = 16, className = "" }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </svg>
-  );
-}
-
-export function LinkedinIcon({ size = 16, className = "" }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect x="2" y="9" width="4" height="12" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
 
 const FOOTER_NAV_LINKS = [
   { id: 'home', label: 'HOME', href: '#home' },
@@ -92,56 +74,16 @@ export default function Footer() {
                 src={mandloiLogo}
                 alt="Mandloi Energy Logo"
                 className="footer-brand-logo"
+                width="220"
+                height="72"
                 loading="lazy"
+                decoding="async"
               />
             </a>
 
             <p className="footer-brand-description">
               Delivering reliable, high-performance solar energy solutions across residential, commercial, industrial and agricultural sectors in Madhya Pradesh.
             </p>
-
-            {/* Social Connect Icons */}
-            <div className="footer-social-row" aria-label="Social Media Links">
-              <a
-                href="https://wa.me/919669555550"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-icon-btn whatsapp"
-                aria-label="Connect on WhatsApp"
-              >
-                <WhatsappIcon size={16} />
-              </a>
-
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-icon-btn instagram"
-                aria-label="Follow on Instagram"
-              >
-                <InstagramIcon size={16} />
-              </a>
-
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-icon-btn facebook"
-                aria-label="Follow on Facebook"
-              >
-                <FacebookIcon size={16} />
-              </a>
-
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-social-icon-btn linkedin"
-                aria-label="Connect on LinkedIn"
-              >
-                <LinkedinIcon size={16} />
-              </a>
-            </div>
           </div>
 
           {/* Column 2: Quick Links */}
@@ -247,25 +189,7 @@ export default function Footer() {
             </p>
             <p className="footer-developer-credit">
               <span className="dev-credit-label">Designed &amp; Developed by </span>
-              <a
-                href="https://www.linkedin.com/in/muskan-patel-19b714323/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="dev-credit-name"
-                aria-label="Muskan Patel LinkedIn Profile"
-              >
-                Muskan Patel
-              </a>
-              <span className="dev-credit-dot" aria-hidden="true">•</span>
-              <a
-                href="https://www.linkedin.com/in/muskan-patel-19b714323/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="dev-credit-link"
-                aria-label="LinkedIn Profile"
-              >
-                LinkedIn
-              </a>
+              <span className="dev-credit-name">Muskan Patel</span>
             </p>
           </div>
         </div>

@@ -31,8 +31,7 @@
   filter: blur(1px);
   pointer-events: none;
   z-index: 0;
-  transition: transform 120ms ease-out;
-  will-change: transform;
+  contain: paint;
 }
 
 .projects-bg-overlay {
@@ -70,6 +69,7 @@
   pointer-events: none;
   z-index: 1;
   animation: ambientDriftSlow 14s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .projects-ambient-top-right {
@@ -84,6 +84,7 @@
   pointer-events: none;
   z-index: 1;
   animation: ambientDriftReverse 12s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .projects-main-section {
@@ -367,6 +368,7 @@
   gap: 1.25rem;
   width: 100%;
   box-sizing: border-box;
+  perspective: 1200px;
 }
 
 .partner-card {
@@ -381,37 +383,45 @@
   align-items: center;
   text-align: center;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 280ms ease,
-              box-shadow 280ms ease;
+  transform-style: preserve-3d;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 320ms ease,
+              box-shadow 320ms ease;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 }
 
 .anim-partner-card {
   opacity: 0;
-  transform: translateY(25px) scale(0.98);
+  transform: translateY(16px);
 }
 
 .projects-partners-section.is-revealed .anim-partner-card {
-  animation: partnerCardEntrance 550ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: calc(180ms + var(--partner-idx, 0) * 80ms);
+  animation: partnerCardEntrance 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--partner-idx, 0) * 80ms);
 }
 
 @keyframes partnerCardEntrance {
   0% {
     opacity: 0;
-    transform: translateY(25px) scale(0.98);
+    transform: translateY(16px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 .partner-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(56, 189, 248, 0.65);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(56, 189, 248, 0.18);
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.18);
+}
+
+.partner-card:active {
+  transform: scale(0.98) translateY(1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(56, 189, 248, 0.18);
 }
 
 .partner-logo-box {
@@ -425,12 +435,17 @@
   padding: 0.5rem 0.85rem;
   margin-bottom: 0.85rem;
   box-sizing: border-box;
-  transition: transform 260ms ease;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
   overflow: hidden;
 }
 
 .partner-card:hover .partner-logo-box {
   transform: scale(1.02);
+}
+
+/* Mobile Carousel Dots (Hidden on Desktop) */
+.partners-mobile-dots {
+  display: none;
 }
 
 .partner-logo-img {
@@ -695,6 +710,7 @@
   gap: 1.5rem;
   width: 100%;
   box-sizing: border-box;
+  perspective: 1200px;
 }
 
 .showcase-card {
@@ -707,37 +723,45 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
-  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 350ms ease,
-              box-shadow 350ms ease;
+  transform-style: preserve-3d;
+  transition: transform 340ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 340ms ease,
+              box-shadow 340ms ease;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
 }
 
 .anim-showcase-card {
   opacity: 0;
-  transform: translateY(28px) scale(0.97);
+  transform: translateY(20px);
 }
 
 .projects-showcase-section.is-revealed .anim-showcase-card {
-  animation: showcaseCardEntrance 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-delay: calc(200ms + var(--showcase-idx, 0) * 120ms);
+  animation: showcaseCardEntrance 550ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(var(--showcase-idx, 0) * 100ms);
 }
 
 @keyframes showcaseCardEntrance {
   0% {
     opacity: 0;
-    transform: translateY(28px) scale(0.97);
+    transform: translateY(20px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 .showcase-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(56, 189, 248, 0.65);
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.65), 0 0 22px rgba(56, 189, 248, 0.22);
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6), 0 0 22px rgba(56, 189, 248, 0.2);
+}
+
+.showcase-card:active {
+  transform: scale(0.98) translateY(1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 16px rgba(56, 189, 248, 0.18);
 }
 
 .showcase-img-wrapper {
@@ -759,6 +783,53 @@
   z-index: 1;
 }
 
+/* Continuous Automatic Sunlight Flare Sweep */
+.showcase-sun-beam {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 160, 40, 0.08) 35%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(56, 189, 248, 0.12) 65%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  pointer-events: none;
+  z-index: 2;
+  animation: solarSunlightSweep 9s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.showcase-card:nth-child(2) .showcase-sun-beam {
+  animation-delay: 3s;
+}
+
+.showcase-card:nth-child(3) .showcase-sun-beam {
+  animation-delay: 6s;
+}
+
+@keyframes solarSunlightSweep {
+  0% {
+    left: -120%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  45% {
+    left: 200%;
+    opacity: 1;
+  }
+  46%, 100% {
+    left: 200%;
+    opacity: 0;
+  }
+}
+
 .showcase-img {
   width: 100%;
   height: 100%;
@@ -768,7 +839,7 @@
 }
 
 .showcase-card:hover .showcase-img {
-  transform: scale(1.04);
+  transform: scale(1.05);
 }
 
 .showcase-icon-badge {
@@ -1001,7 +1072,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .projects-main-section {
     padding-top: 2.25rem;
     padding-bottom: 3.5rem;
@@ -1015,8 +1086,80 @@
     gap: 0.85rem 1.25rem;
   }
 
+  /* ------------------------------------------------------------------------
+     Mobile Horizontal Rotation / Touch Carousel (<= 768px)
+     Active card is prominently displayed with a peek of the next card
+     ------------------------------------------------------------------------ */
   .projects-partners-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0.4rem clamp(16px, 5vw, 24px) 0.85rem;
+    margin-left: calc(-1 * clamp(16px, 3.2vw, 40px));
+    margin-right: calc(-1 * clamp(16px, 3.2vw, 40px));
+    width: calc(100% + 2 * clamp(16px, 3.2vw, 40px));
+    gap: 1rem;
+    box-sizing: border-box;
+  }
+
+  .projects-partners-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .partner-card {
+    flex: 0 0 84vw;
+    max-width: 330px;
+    min-width: 260px;
+    scroll-snap-align: center;
+    margin: 0;
+    box-sizing: border-box;
+    opacity: 0.82;
+    transform: scale(0.97);
+    transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 320ms ease,
+                border-color 320ms ease,
+                box-shadow 320ms ease;
+  }
+
+  .partner-card.mobile-active {
+    opacity: 1;
+    transform: scale(1);
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 20px rgba(56, 189, 248, 0.22);
+  }
+
+  /* Mobile Pagination Dots */
+  .partners-mobile-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    width: 100%;
+  }
+
+  .partners-dot-btn {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.22);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    padding: 0;
+    cursor: pointer;
+    transition: all 260ms cubic-bezier(0.22, 1, 0.36, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .partners-dot-btn.is-active {
+    width: 24px;
+    background: linear-gradient(90deg, #38bdf8, #ffa028);
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
   }
 
   .projects-showcase-grid {
@@ -1072,8 +1215,11 @@
   .showcase-card,
   .showcase-img,
   .projects-cta-btn,
-  .cta-arrow-shift {
+  .cta-arrow-shift,
+  .showcase-sun-beam {
     transition: none !important;
     transform: none !important;
+    animation: none !important;
+    display: none !important;
   }
 }

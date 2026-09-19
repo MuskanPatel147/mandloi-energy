@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Home from './pages/Home';
 import Quote from './pages/Quote';
+import MobileDesktopNotice from './components/MobileDesktopNotice';
 import { navigateTo } from './utils/navigation';
 
 export function getCanonicalRoute() {
@@ -88,9 +89,10 @@ export default function App() {
     };
   }, []);
 
-  if (currentRoute === 'quote') {
-    return <Quote />;
-  }
-
-  return <Home />;
+  return (
+    <>
+      <MobileDesktopNotice />
+      {currentRoute === 'quote' ? <Quote /> : <Home />}
+    </>
+  );
 }

@@ -90,6 +90,10 @@ export default function Navbar({ activePage = 'home' }) {
                 src={mandloiLogo}
                 alt="Mandloi Energy - Powering Tomorrow"
                 className="brand-logo"
+                width="220"
+                height="72"
+                loading="eager"
+                decoding="async"
               />
             </a>
 

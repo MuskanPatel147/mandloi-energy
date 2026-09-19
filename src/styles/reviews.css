@@ -24,6 +24,7 @@
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  contain: paint;
 }
 
 .reviews-ambient-glow-cyan {
@@ -36,6 +37,7 @@
   background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0.04) 45%, transparent 70%);
   filter: blur(65px);
   animation: reviewsAmbientPulse 10s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .reviews-ambient-glow-warm {
@@ -48,6 +50,7 @@
   background: radial-gradient(circle, rgba(255, 160, 40, 0.075) 0%, transparent 65%);
   filter: blur(55px);
   animation: reviewsAmbientPulseReverse 12s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 @keyframes reviewsAmbientPulse {
@@ -502,7 +505,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: clamp(2.25rem, 3.5vw, 3rem);
   box-sizing: border-box;
 }
 
@@ -842,143 +845,6 @@
 }
 
 /* --------------------------------------------------------------------------
-   Distinctive Proportional Progress Bar (01 ━━━━━━━ 05 / 250+)
-   -------------------------------------------------------------------------- */
-.reviews-carousel-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1.25rem;
-  width: 100%;
-  margin-top: 1.5rem;
-  box-sizing: border-box;
-}
-
-.reviews-distinctive-progress {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 0.45rem 1.15rem;
-  background: rgba(12, 18, 28, 0.88);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  border-radius: 9999px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-}
-
-.reviews-counter-num {
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  font-weight: 800;
-  letter-spacing: 0.05em;
-  display: inline-block;
-}
-
-.reviews-counter-num.start {
-  color: #38bdf8;
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
-}
-
-.reviews-counter-num.end {
-  color: #ffa028;
-  text-shadow: 0 0 10px rgba(255, 160, 40, 0.4);
-}
-
-.reviews-proportional-bar {
-  position: relative;
-  width: 130px;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 9999px;
-  overflow: visible;
-}
-
-.reviews-proportional-fill {
-  height: 100%;
-  background: linear-gradient(to right, #38bdf8, #ffa028);
-  border-radius: 9999px;
-  transition: width 540ms cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
-}
-
-.reviews-proportional-thumb {
-  position: absolute;
-  top: 50%;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ffa028;
-  box-shadow: 0 0 10px #ffa028;
-  transform: translate(-50%, -50%);
-  transition: left 540ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reviews-counter-total {
-  font-family: var(--font-sans);
-  color: #8899a6;
-  font-size: 0.8125rem;
-  font-weight: 600;
-}
-
-.animate-counter-tick {
-  animation: counterTick 280ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-@keyframes counterTick {
-  0% {
-    opacity: 0.45;
-    transform: translateY(-2px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Quick Navigation Controls */
-.reviews-quick-nav {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.reviews-quick-btn {
-  background: rgba(12, 18, 28, 0.85);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: #c5cdd4;
-  font-family: var(--font-sans);
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.35rem 0.75rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.reviews-quick-btn:hover:not(:disabled) {
-  border-color: #38bdf8;
-  color: #ffffff;
-  background: rgba(56, 189, 248, 0.15);
-}
-
-.reviews-quick-btn.primary {
-  background: linear-gradient(135deg, rgba(255, 160, 40, 0.2), rgba(255, 160, 40, 0.1));
-  border-color: #ffa028;
-  color: #ffa028;
-}
-
-.reviews-quick-btn.primary:hover {
-  background: #ffa028;
-  color: #06090e;
-  box-shadow: 0 0 14px rgba(255, 160, 40, 0.4);
-}
-
-.reviews-quick-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* --------------------------------------------------------------------------
    Statistics / Trust Bar
    -------------------------------------------------------------------------- */
 .reviews-trust-bar {
@@ -1101,16 +967,6 @@
     width: 36px;
     height: 36px;
     min-width: 36px;
-  }
-
-  .reviews-carousel-footer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.85rem;
-  }
-
-  .reviews-proportional-bar {
-    width: 90px;
   }
 
   .reviews-trust-bar {

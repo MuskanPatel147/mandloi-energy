@@ -28,6 +28,7 @@
   filter: blur(2px);
   pointer-events: none;
   z-index: 0;
+  contain: paint;
 }
 
 .quote-bg-overlay {
@@ -53,6 +54,7 @@
   pointer-events: none;
   z-index: 1;
   animation: ambientDriftSlow 12s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .quote-ambient-bottom-right {
@@ -67,6 +69,7 @@
   pointer-events: none;
   z-index: 1;
   animation: ambientDriftReverse 14s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 .quote-main-section {
@@ -368,9 +371,11 @@
 /* Bill Range Radio Grid */
 .quote-bill-options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.65rem;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   box-sizing: border-box;
 }
 
@@ -380,6 +385,9 @@
   align-items: center;
   justify-content: center;
   padding: 0.65rem 0.6rem;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
   background: rgba(12, 18, 28, 0.85);
   border: 1.5px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
@@ -387,6 +395,7 @@
   text-align: center;
   transition: border-color var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
   user-select: none;
+  overflow: hidden;
 }
 
 .quote-bill-pill:hover {
@@ -686,11 +695,21 @@
   }
 
   .quote-form-card {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem 1.15rem;
+    border-radius: 18px;
   }
 
   .quote-bill-options-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .quote-bill-pill {
+    padding: 0.55rem 0.5rem;
+  }
+
+  .quote-bill-label-text {
+    font-size: 0.75rem;
   }
 
   .quote-trust-strip {
@@ -699,16 +718,56 @@
   }
 }
 
-@media (max-width: 390px) {
-  .quote-bill-options-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 480px) {
+  .quote-form-card {
+    padding: 1.25rem 0.95rem;
+    border-radius: 16px;
   }
 
+  .quote-bill-options-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .quote-bill-pill {
+    padding: 0.5rem 0.4rem;
+  }
+
+  .quote-bill-label-text {
+    font-size: 0.7rem;
+  }
+
+  .quote-input {
+    height: 44px;
+    font-size: 0.875rem;
+  }
+
+  .quote-submit-btn {
+    height: 48px;
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 360px) {
   .quote-heading {
     font-size: 1.55rem;
   }
 
   .quote-form-card {
-    padding: 1.25rem 1rem;
+    padding: 1.15rem 0.85rem;
+    border-radius: 14px;
+  }
+
+  .quote-bill-options-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.35rem;
+  }
+
+  .quote-bill-pill {
+    padding: 0.45rem 0.35rem;
+  }
+
+  .quote-bill-label-text {
+    font-size: 0.675rem;
   }
 }

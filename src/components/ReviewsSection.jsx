@@ -48,9 +48,9 @@ export default function ReviewsSection() {
             <span className="reviews-badge-line anim-stage-line" aria-hidden="true" />
           </div>
 
-          {/* Main Split Heading */}
+          {/* Main Split Heading with Exact Spacing */}
           <h2 className="reviews-main-heading" id="reviews-heading">
-            <span className="reviews-heading-line1 anim-stage-h1">What Our Customers Say</span>
+            <span className="reviews-heading-line1 anim-stage-h1">What Our Customers Say </span>
             <span className="reviews-heading-line2 anim-stage-h2">
               <span className="reviews-heading-text">Powering A Better Tomorrow</span>
               <span className="reviews-shimmer-sweep" aria-hidden="true" />
@@ -61,42 +61,32 @@ export default function ReviewsSection() {
           <p className="reviews-hero-subtitle anim-stage-desc">
             Explore feedback and experiences from our customers across residential, commercial, industrial and agricultural solar installations.
           </p>
-
-          {/* Dataset Badge */}
-          <div className="reviews-dataset-badge anim-stage-dataset" role="status" aria-label="Customer reviews count">
-            <div className="reviews-avatar-stack" aria-hidden="true">
-              <span className="reviews-avatar avatar-1">👤</span>
-              <span className="reviews-avatar avatar-2">👤</span>
-              <span className="reviews-avatar avatar-3">👤</span>
-            </div>
-            <span className="reviews-dataset-text">
-              <strong className="highlight-cyan reviews-number-glow">{REVIEWS_DATA.length}+</strong> Customer Reviews in Dataset
-            </span>
-          </div>
         </div>
 
-        {/* Complete 250+ Review Carousel */}
+        {/* 3D Distinctive Carousel */}
         <ReviewsCarousel reviews={REVIEWS_DATA} />
 
-        {/* Statistics / Information Strip */}
-        <div className="reviews-trust-bar">
-          {TRUST_STATS_DATA.map((item) => (
-            <div key={item.id} className="reviews-trust-item">
-              <div className="reviews-trust-icon-box" aria-hidden="true">
-                {item.iconType === 'team' && <TeamTrustIcon size={56} />}
-                {item.iconType === 'ribbon' && <RibbonTrustIcon size={56} />}
-                {item.iconType === 'shield' && <ShieldTrustIcon size={56} />}
-                {item.iconType === 'solar-sun' && <SolarSunTrustIcon size={56} />}
+        {/* Bottom Statistics / Trust Bar */}
+        <div className="reviews-trust-bar-wrapper">
+          <div className="reviews-trust-bar" role="region" aria-label="Key Trust Statistics">
+            {TRUST_STATS_DATA.map((item) => (
+              <div key={item.id} className="reviews-trust-item">
+                <div className="reviews-trust-icon-box" aria-hidden="true">
+                  {item.icon === 'team' && <TeamTrustIcon size={34} />}
+                  {item.icon === 'ribbon' && <RibbonTrustIcon size={34} />}
+                  {item.icon === 'shield' && <ShieldTrustIcon size={34} />}
+                  {item.icon === 'sun' && <SolarSunTrustIcon size={34} />}
+                </div>
+                <div className="reviews-trust-text-group">
+                  <span className={`reviews-trust-value ${item.type === 'primary' ? 'primary-value' : 'cyan-value'}`}>
+                    {item.value}
+                  </span>
+                  <span className="reviews-trust-label">{item.label}</span>
+                  <p className="reviews-trust-subtext">{item.subtext}</p>
+                </div>
               </div>
-              <div className="reviews-trust-text-group">
-                <span className={`reviews-trust-value ${item.isCyanTitle ? 'cyan-value' : 'primary-value'}`}>
-                  {item.value}
-                </span>
-                <span className="reviews-trust-label">{item.label}</span>
-                <span className="reviews-trust-subtext">{item.subtext}</span>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

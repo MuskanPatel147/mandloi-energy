@@ -89,6 +89,8 @@ export default function ReviewsCarousel({ reviews = [] }) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [visibleCount, totalReviews]);
 
+  const dragRaf = useRef(null);
+
   // Touch Swipe Gesture Physics
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
@@ -98,12 +100,22 @@ export default function ReviewsCarousel({ reviews = [] }) {
 
   const handleTouchMove = (e) => {
     if (!isDragging.current || touchStartX.current === null) return;
-    const diff = e.touches[0].clientX - touchStartX.current;
-    // Dampen drag offset for smooth resistance
-    setDragOffset(diff * 0.45);
+    const clientX = e.touches[0].clientX;
+    if (dragRaf.current) return;
+
+    dragRaf.current = requestAnimationFrame(() => {
+      dragRaf.current = null;
+      if (!isDragging.current || touchStartX.current === null) return;
+      const diff = clientX - touchStartX.current;
+      setDragOffset(diff * 0.45);
+    });
   };
 
   const handleTouchEnd = () => {
+    if (dragRaf.current) {
+      cancelAnimationFrame(dragRaf.current);
+      dragRaf.current = null;
+    }
     if (!isDragging.current) return;
     if (Math.abs(dragOffset) > 25) {
       if (dragOffset < 0) {
@@ -124,10 +136,15 @@ export default function ReviewsCarousel({ reviews = [] }) {
     }
     const btn = ref.current;
     if (!btn) return;
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - (rect.left + rect.width / 2);
-    const y = e.clientY - (rect.top + rect.height / 2);
-    btn.style.transform = `translate(${x / factor}px, ${y / factor}px) scale(1.06)`;
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    requestAnimationFrame(() => {
+      if (!btn) return;
+      const rect = btn.getBoundingClientRect();
+      const x = clientX - (rect.left + rect.width / 2);
+      const y = clientY - (rect.top + rect.height / 2);
+      btn.style.transform = `translate(${x / factor}px, ${y / factor}px) scale(1.06)`;
+    });
   };
 
   const handleMagneticLeave = (ref) => {
@@ -135,15 +152,6 @@ export default function ReviewsCarousel({ reviews = [] }) {
     if (!btn) return;
     btn.style.transform = '';
   };
-
-  // 01 ━━━━━━━ 05 / 250+ Proportional Progress Formatting
-  const startNum = startIndex + 1;
-  const endNum = Math.min(startIndex + visibleCount, totalReviews);
-  const startFormatted = String(startNum).padStart(2, '0');
-  const endFormatted = String(endNum).padStart(2, '0');
-  const totalPages = Math.ceil(totalReviews / visibleCount);
-  const currentPage = Math.floor(startIndex / visibleCount) + 1;
-  const progressPercent = ((currentPage) / totalPages) * 100;
 
   // Identify center card index for depth prominence
   const centerRelativeIndex = Math.floor(visibleCount / 2);
@@ -221,67 +229,6 @@ export default function ReviewsCarousel({ reviews = [] }) {
             <ArrowRightIcon size={20} />
           </span>
         </button>
-      </div>
-
-      {/* Distinctive Progress Bar & Counter */}
-      <div className="reviews-carousel-footer">
-        {/* Proportional Progress Track: 01 ━━━━━━━ 05 / 250+ */}
-        <div className="reviews-distinctive-progress" aria-label={`Showing reviews ${startFormatted} to ${endFormatted} of ${totalReviews}+`}>
-          <span key={startFormatted} className="reviews-counter-num start animate-counter-tick">
-            {startFormatted}
-          </span>
-
-          <div className="reviews-proportional-bar">
-            <div
-              className="reviews-proportional-fill"
-              style={{ width: `${progressPercent}%` }}
-            />
-            <div
-              className="reviews-proportional-thumb"
-              style={{ left: `${progressPercent}%` }}
-            />
-          </div>
-
-          <span key={endFormatted} className="reviews-counter-num end animate-counter-tick">
-            {endFormatted}
-          </span>
-
-          <span className="reviews-counter-total">
-            / {totalReviews}+
-          </span>
-        </div>
-
-        {/* Quick Nav Controls */}
-        <div className="reviews-quick-nav">
-          <button
-            type="button"
-            className="reviews-quick-btn"
-            onClick={() => {
-              triggerAnimation('prev');
-              setStartIndex(0);
-            }}
-            disabled={startIndex === 0}
-            aria-label="Go to first reviews"
-          >
-            First
-          </button>
-          <button
-            type="button"
-            className="reviews-quick-btn"
-            onClick={handlePrev}
-            aria-label="Previous reviews group"
-          >
-            Prev
-          </button>
-          <button
-            type="button"
-            className="reviews-quick-btn primary"
-            onClick={handleNext}
-            aria-label="Next reviews group"
-          >
-            Next →
-          </button>
-        </div>
       </div>
     </div>
   );

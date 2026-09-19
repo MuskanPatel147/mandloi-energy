@@ -1,29 +1,45 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PROCESS_STEPS } from '../data/processData';
 import { getProcessIcon } from './ProcessIcons';
 import mandloiLogo from '../assets/logo/mandloi-logo.png';
 
 /**
  * ProcessSection Component (How It Works / Our Process)
+ * Pure, lightweight, smooth SVG + CSS animated process visualization
  * Viewport-Fit Scale: Fits entire diagram on 1366x768 / 1536x864 screens without scrolling/clipping
  */
 export default function ProcessSection() {
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isInView, setIsInView] = useState(true);
+  const sectionRef = React.useRef(null);
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   // Auto-cycle sequentially (01 -> 02 -> 03 -> 04 -> 05 -> 01)
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || !isInView) return;
 
     const timer = setInterval(() => {
       setActiveStepIndex((prev) => (prev + 1) % PROCESS_STEPS.length);
-    }, 2800);
+    }, 3200);
 
     return () => clearInterval(timer);
-  }, [isPaused]);
+  }, [isPaused, isInView]);
 
   return (
     <section
+      ref={sectionRef}
       className="process-section"
       id="how-it-works"
       aria-labelledby="process-title"
@@ -231,6 +247,10 @@ export default function ProcessSection() {
               src={mandloiLogo}
               alt="Mandloi Energy — Powering Tomorrow"
               className="process-center-logo"
+              width="180"
+              height="60"
+              loading="lazy"
+              decoding="async"
             />
           </div>
 
@@ -366,44 +386,89 @@ export default function ProcessSection() {
         </div>
 
         {/* ==================================================================
-            3. Mobile / Tablet Responsive Adaptation (< 1160px)
+            3. Mobile / Tablet Responsive Adaptation (< 1024px)
+               Preserves the exact same desktop visual hierarchy,
+               colors, glowing nodes, number badges, and energy flow spine
             ================================================================== */}
-        <div className="process-mobile-wrapper">
-          <div className="process-mobile-center-logo">
-            <img
-              src={mandloiLogo}
-              alt="Mandloi Energy"
-              className="process-mobile-logo"
-            />
+        <div className="process-responsive-wrapper" aria-label="Process steps timeline">
+          {/* Central Authentic Mandloi Energy Brand Flow Anchor */}
+          <div className="process-responsive-brand">
+            <div className="process-responsive-logo-box">
+              <img
+                src={mandloiLogo}
+                alt="Mandloi Energy — Powering Tomorrow"
+                className="process-responsive-logo"
+                width="160"
+                height="54"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div className="process-responsive-start-indicator" aria-hidden="true">
+              <span className="process-brand-pulse-dot" />
+              <span className="process-brand-flow-label">OUR 5-STEP PROCESS</span>
+              <span className="process-brand-pulse-dot" />
+            </div>
           </div>
 
-          <div className="process-mobile-list">
+          {/* Connected Vertical Energy Flow Timeline */}
+          <div className="process-timeline-list" role="list">
             {PROCESS_STEPS.map((step, idx) => {
               const isActive = activeStepIndex === idx;
-              const cardStyles = {
+              const isLast = idx === PROCESS_STEPS.length - 1;
+              const nextStep = !isLast ? PROCESS_STEPS[idx + 1] : null;
+
+              const stepStyles = {
                 '--node-accent': step.accentColor,
                 '--node-glow': step.glowColor,
                 '--text-accent': step.accentColor,
-                '--card-border': isActive ? step.accentColor : `${step.accentColor}33`,
+                '--card-border': isActive ? step.accentColor : `${step.accentColor}38`,
+                '--next-accent': nextStep ? nextStep.accentColor : step.accentColor,
               };
 
               return (
                 <div
                   key={step.id}
-                  className={`process-mobile-card ${isActive ? 'is-active' : ''}`}
-                  style={cardStyles}
+                  className={`process-timeline-item ${isActive ? 'is-active' : ''}`}
+                  style={stepStyles}
                   onClick={() => setActiveStepIndex(idx)}
+                  role="listitem"
+                  aria-label={`Step ${step.number}: ${step.title}`}
                 >
-                  <div className="process-mobile-node-col">
-                    <div className="process-mobile-node-circle">
-                      <span className="process-mobile-number-badge">{step.number}</span>
+                  {/* Left Column: Node Circle + Vertical Flow Spine */}
+                  <div className="process-timeline-node-col">
+                    <div className="process-timeline-node-circle">
+                      <span className="process-timeline-number-badge">{step.number}</span>
                       {getProcessIcon(step.icon, step.accentColor, 26)}
                     </div>
+
+                    {/* Continuous Energy Flow Spine with Directional Arrow (01 -> 02 -> 03 -> 04 -> 05) */}
+                    {!isLast && (
+                      <div className="process-timeline-spine" aria-hidden="true">
+                        <div
+                          className={`process-timeline-energy-line ${
+                            step.accentType === 'cyan' ? 'flow-cyan' : 'flow-orange'
+                          }`}
+                        />
+                        <div className="process-timeline-arrow-indicator">
+                          <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                            <path
+                              d="M1 1L5 5L9 1"
+                              stroke={nextStep ? nextStep.accentColor : '#38bdf8'}
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
-                  <div className="process-mobile-text-col">
-                    <h3 className="process-mobile-title">{step.title}</h3>
-                    <p className="process-mobile-desc">{step.description}</p>
+                  {/* Right Column: Glass Step Card */}
+                  <div className="process-timeline-card">
+                    <h3 className="process-timeline-title">{step.title}</h3>
+                    <p className="process-timeline-desc">{step.description}</p>
                   </div>
                 </div>
               );

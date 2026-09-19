@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 /**
  * Clean SVG Vector Icons for the Why Mandloi Energy Section
@@ -220,27 +220,27 @@ export function ShieldCheckIcon({ className = '', size = 28, color = '#60a5fa' }
   );
 }
 
-export function getWhyMandloiIcon(iconName, color) {
+export function getWhyMandloiIcon(iconName, color, size = 28) {
   switch (iconName) {
     case 'diamond':
-      return <DiamondIcon color={color} />;
+      return <DiamondIcon color={color} size={size} />;
     case 'gear':
-      return <GearIcon color={color} />;
+      return <GearIcon color={color} size={size} />;
     case 'government':
-      return <GovtBuildingIcon color={color} />;
+      return <GovtBuildingIcon color={color} size={size} />;
     case 'tools':
-      return <ToolsIcon color={color} />;
+      return <ToolsIcon color={color} size={size} />;
     case 'lightning':
-      return <LightningIcon color={color} />;
+      return <LightningIcon color={color} size={size} />;
     case 'calendar':
-      return <CalendarIcon color={color} />;
+      return <CalendarIcon color={color} size={size} />;
     case 'rupee':
-      return <RupeeIcon color={color} />;
+      return <RupeeIcon color={color} size={size} />;
     case 'headset':
-      return <HeadsetIcon color={color} />;
+      return <HeadsetIcon color={color} size={size} />;
     case 'shield':
-      return <ShieldCheckIcon color={color} />;
+      return <ShieldCheckIcon color={color} size={size} />;
     default:
-      return <DiamondIcon color={color} />;
+      return <DiamondIcon color={color} size={size} />;
   }
 }

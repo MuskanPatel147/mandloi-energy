@@ -13,7 +13,6 @@ import { REVIEWS_DATA, TRUST_STATS_DATA } from '../data/reviewsData';
 
 export default function Reviews() {
   const [inView, setInView] = useState(false);
-  const [parallaxY, setParallaxY] = useState(0);
   const headerRef = useRef(null);
 
   // 1. Observer for Cinematic Left-Side Sequence Entrance
@@ -38,27 +37,6 @@ export default function Reviews() {
       observer.disconnect();
       clearTimeout(timer);
     };
-  }, []);
-
-  // 2. Subtle Parallax on Desktop (8–14px max subtle movement)
-  useEffect(() => {
-    if (window.innerWidth < 1024 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
-    }
-
-    const handleScroll = () => {
-      if (!headerRef.current) return;
-      const rect = headerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      if (rect.top < windowHeight && rect.bottom > 0) {
-        const progress = (windowHeight - rect.top) / (windowHeight + rect.height) - 0.5;
-        const shift = Math.max(-12, Math.min(12, progress * 22));
-        setParallaxY(shift);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -147,7 +125,7 @@ export default function Reviews() {
 
             {/* 2. Main Split Heading */}
             <h1 className="reviews-main-heading">
-              <span className="reviews-heading-line1 anim-stage-h1">What Our Customers Say</span>
+              <span className="reviews-heading-line1 anim-stage-h1">What Our Customers Say </span>
               <span className="reviews-heading-line2 anim-stage-h2">
                 <span className="reviews-heading-text">Powering A Better Tomorrow</span>
                 <span className="reviews-shimmer-sweep" aria-hidden="true" />

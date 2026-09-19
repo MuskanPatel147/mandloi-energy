@@ -1,6 +1,7 @@
 import React from 'react';
 import SystemSpecification from './SystemSpecification';
 import InfoStrip from './InfoStrip';
+import HeroSolar3D from './HeroSolar3D';
 import { WhatsappFilledIcon } from './Icons';
 import homeBg from '../assets/images/home-bg.png';
 import { handleNavClick } from '../utils/navigation';
@@ -8,14 +9,18 @@ import { handleNavClick } from '../utils/navigation';
 export default function Hero() {
   return (
     <section className="hero-section" id="home" aria-label="Hero Section">
-      {/* 1. Background image layer with balanced photographic visibility */}
+      {/* 1. Background image layer with balanced photographic visibility and Real-time 3D WebGL */}
       <div className="hero-bg-container" aria-hidden="true">
         <img
           src={homeBg}
           alt=""
           className="hero-bg-image"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
         />
         <div className="hero-backdrop-overlay" />
+        <HeroSolar3D />
       </div>
 
       <div className="container hero-content-wrapper">
@@ -72,7 +77,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 8. Approved WhatsApp Floating CTA */}
+      {/* Approved WhatsApp Floating CTA */}
       <a
         href="https://wa.me/919669555550"
         target="_blank"

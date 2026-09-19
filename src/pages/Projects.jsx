@@ -27,12 +27,15 @@ export default function Projects() {
   const [partnersRevealed, setPartnersRevealed] = useState(false);
   const [showcaseRevealed, setShowcaseRevealed] = useState(false);
   const [ctaRevealed, setCtaRevealed] = useState(false);
-  const [parallaxY, setParallaxY] = useState(0);
+  const [activePartnerIndex, setActivePartnerIndex] = useState(0);
 
   const heroRef = useRef(null);
   const partnersRef = useRef(null);
   const showcaseRef = useRef(null);
   const ctaRef = useRef(null);
+  const partnersGridRef = useRef(null);
+  const isUserInteracting = useRef(false);
+  const autoScrollTimer = useRef(null);
 
   // 1. IntersectionObserver for Sequential Section Entrance
   useEffect(() => {
@@ -66,49 +69,94 @@ export default function Projects() {
     };
   }, []);
 
-  // 2. Subtle Background Parallax on Desktop
-  useEffect(() => {
-    if (window.innerWidth < 1024 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      return;
+  // 2. Mobile Touch / Swipe Scroll-Tracking
+  const handlePartnersScroll = () => {
+    if (!partnersGridRef.current || window.innerWidth > 768) return;
+    const el = partnersGridRef.current;
+    const scrollLeft = el.scrollLeft;
+    const firstChild = el.children[0];
+    if (!firstChild) return;
+    const cardWidth = firstChild.offsetWidth + 16;
+    const newIdx = Math.round(scrollLeft / cardWidth);
+    if (newIdx >= 0 && newIdx < PARTNERS_DATA.length && newIdx !== activePartnerIndex) {
+      setActivePartnerIndex(newIdx);
     }
+  };
 
-    const handleScroll = () => {
-      const scrollPos = window.scrollY;
-      const shift = Math.max(-12, Math.min(12, scrollPos * 0.03));
-      setParallaxY(shift);
+  const scrollToPartner = (idx) => {
+    if (!partnersGridRef.current) return;
+    const el = partnersGridRef.current;
+    const card = el.children[idx];
+    if (card) {
+      const leftPos = card.offsetLeft - (el.offsetWidth - card.offsetWidth) / 2;
+      el.scrollTo({ left: Math.max(0, leftPos), behavior: 'smooth' });
+      setActivePartnerIndex(idx);
+    }
+  };
+
+  const handleTouchStart = () => {
+    isUserInteracting.current = true;
+  };
+
+  const handleTouchEnd = () => {
+    setTimeout(() => {
+      isUserInteracting.current = false;
+    }, 3500);
+  };
+
+  // 4. Optional Mobile Auto-Rotation (4.5s Interval)
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const startAutoTimer = () => {
+      if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
+      autoScrollTimer.current = setInterval(() => {
+        if (window.innerWidth > 768 || isUserInteracting.current || !partnersGridRef.current) return;
+        setActivePartnerIndex((prev) => {
+          const next = (prev + 1) % PARTNERS_DATA.length;
+          scrollToPartner(next);
+          return next;
+        });
+      }, 4500);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    startAutoTimer();
+
+    return () => {
+      if (autoScrollTimer.current) clearInterval(autoScrollTimer.current);
+    };
   }, []);
 
   return (
     <div className="projects-page-wrapper site-wrapper">
-      {/* Layered Cinematic Solar Backdrop */}
-      <div
-        className="projects-bg-backdrop"
-        style={{
-          backgroundImage: `url(${homeBg})`,
-          transform: `translate3d(0, ${parallaxY}px, 0)`,
-        }}
-        aria-hidden="true"
-      />
-      <div className="projects-bg-overlay" aria-hidden="true" />
-      <div className="projects-ambient-top-left" aria-hidden="true" />
-      <div className="projects-ambient-top-right" aria-hidden="true" />
+      {/* Dynamic Background Atmosphere */}
+      <div className="projects-bg-backdrop" aria-hidden="true">
+        <img
+          src={homeBg}
+          alt=""
+          className="projects-bg-image"
+          loading="eager"
+          decoding="async"
+        />
+        <div className="projects-bg-overlay" />
+        <div className="projects-ambient-top-left" />
+        <div className="projects-ambient-top-right" />
+      </div>
 
-      {/* 1. Global Header with PROJECTS active */}
+      {/* Global Navigation with PROJECTS active */}
       <Navbar activePage="projects" />
 
-      {/* 2. Main Projects Content */}
+      {/* Main Content Container */}
       <main className="projects-main-section" id="projects-content">
         <div className="container projects-content-wrapper">
           {/* ================================================================
-              Section 1: Hero Block
+              Section 1: Hero Trust Block (Editorial Layout)
               ================================================================ */}
           <div
             ref={heroRef}
             className={`projects-hero-block ${heroRevealed ? 'is-revealed' : ''}`}
+            style={{ transform: `translate3d(0, ${parallaxY}px, 0)` }}
           >
             <div className="projects-badge-wrapper anim-hero-badge">
               <span className="projects-badge">OUR PROJECTS</span>
@@ -161,11 +209,20 @@ export default function Projects() {
               <span className="section-divider-line right anim-line-right" aria-hidden="true" />
             </div>
 
-            <div className="projects-partners-grid">
+            {/* Cards Grid on Desktop / Smooth Horizontal Carousel on Mobile */}
+            <div
+              ref={partnersGridRef}
+              className="projects-partners-grid"
+              onScroll={handlePartnersScroll}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              role="region"
+              aria-label="Previous Projects Cards"
+            >
               {PARTNERS_DATA.map((partner, idx) => (
                 <article
                   key={partner.id}
-                  className="partner-card anim-partner-card"
+                  className={`partner-card anim-partner-card ${activePartnerIndex === idx ? 'mobile-active' : ''}`}
                   style={{ '--partner-idx': idx }}
                   aria-label={`Project: ${partner.name}`}
                 >
@@ -180,6 +237,7 @@ export default function Projects() {
                             alt="Nayara Energy"
                             className="trio-logo-nayara"
                             loading="lazy"
+                            decoding="async"
                           />
                         </div>
 
@@ -198,6 +256,7 @@ export default function Projects() {
                             alt="Hindustan Petroleum"
                             className="trio-logo-hp"
                             loading="lazy"
+                            decoding="async"
                           />
                         </div>
                       </div>
@@ -235,6 +294,21 @@ export default function Projects() {
                 </article>
               ))}
             </div>
+
+            {/* Mobile Pagination Dot Indicators (<= 768px only) */}
+            <div className="partners-mobile-dots" role="tablist" aria-label="Project cards navigation">
+              {PARTNERS_DATA.map((p, idx) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  className={`partners-dot-btn ${activePartnerIndex === idx ? 'is-active' : ''}`}
+                  onClick={() => scrollToPartner(idx)}
+                  aria-label={`Go to project ${idx + 1}: ${p.name}`}
+                  aria-selected={activePartnerIndex === idx}
+                  role="tab"
+                />
+              ))}
+            </div>
           </section>
 
           {/* ================================================================
@@ -268,8 +342,10 @@ export default function Projects() {
                       alt={item.title}
                       className="showcase-img"
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="showcase-img-overlay" aria-hidden="true" />
+                    <div className="showcase-sun-beam" aria-hidden="true" />
                     <div className="showcase-icon-badge" aria-hidden="true">
                       {item.iconType === 'home' && <HomeProjectIcon size={20} />}
                       {item.iconType === 'industrial' && <FactoryProjectIcon size={20} />}

@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Mandloi Energy — Hero Section Styles (Strict Reference Match home(8).png)
    ========================================================================== */
 
@@ -27,6 +27,7 @@
   overflow: hidden;
   z-index: var(--z-base);
   pointer-events: none;
+  contain: paint;
 }
 
 .hero-bg-image {

@@ -1,18 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import founderImg from '../assets/images/founder.jpg';
 
 /**
  * AboutSection Component
  * Exact approved About Us section with leadership spotlight and core mission values
+ * Enhanced with subtle, premium, hardware-accelerated viewport-based animations.
  */
 export default function AboutSection() {
+  const [heroRevealed, setHeroRevealed] = useState(false);
+  const [quoteRevealed, setQuoteRevealed] = useState(false);
+  const heroRef = useRef(null);
+  const quoteRef = useRef(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
+      setHeroRevealed(true);
+      setQuoteRevealed(true);
+      return;
+    }
+
+    const observerOptions = {
+      threshold: 0.12,
+      rootMargin: '0px 0px -20px 0px',
+    };
+
+    const handleObserve = (setter) => ([entry], obs) => {
+      if (entry && entry.isIntersecting) {
+        setter(true);
+        obs.unobserve(entry.target);
+      }
+    };
+
+    const heroObs = new IntersectionObserver(handleObserve(setHeroRevealed), observerOptions);
+    const quoteObs = new IntersectionObserver(handleObserve(setQuoteRevealed), observerOptions);
+
+    if (heroRef.current) heroObs.observe(heroRef.current);
+    if (quoteRef.current) quoteObs.observe(quoteRef.current);
+
+    // Fallback timer to ensure content is visible in all environments
+    const fallbackTimer = setTimeout(() => {
+      setHeroRevealed(true);
+      setQuoteRevealed(true);
+    }, 1200);
+
+    return () => {
+      heroObs.disconnect();
+      quoteObs.disconnect();
+      clearTimeout(fallbackTimer);
+    };
+  }, []);
+
   return (
-    <section className="about-main-section" id="about" aria-labelledby="about-title">
+    <section
+      className={`about-main-section ${heroRevealed ? 'is-revealed' : ''}`}
+      id="about"
+      aria-labelledby="about-title"
+    >
       <div className="about-ambient-top-left" aria-hidden="true" />
       <div className="about-ambient-bottom-right" aria-hidden="true" />
 
       <div className="container about-content-wrapper">
-        <div className="about-hero-grid">
+        <div ref={heroRef} className={`about-hero-grid ${heroRevealed ? 'is-revealed' : ''}`}>
           <div className="about-text-col">
             <div className="about-badge-wrapper">
               <span className="about-badge">ABOUT US</span>
@@ -51,6 +99,8 @@ export default function AboutSection() {
                   src={founderImg}
                   alt="Ashish Mandloi, Founder & CEO"
                   className="about-founder-img"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -63,7 +113,10 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <div className="about-quote-card">
+        <div
+          ref={quoteRef}
+          className={`about-quote-card ${quoteRevealed ? 'is-revealed' : ''}`}
+        >
           <span className="about-quote-mark left" aria-hidden="true">“</span>
           <p className="about-quote-text">
             When you choose Mandloi Energy, you are choosing a{' '}

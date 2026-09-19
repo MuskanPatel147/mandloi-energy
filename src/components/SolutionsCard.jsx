@@ -1,11 +1,11 @@
-﻿import React from 'react';
+import React, { memo } from 'react';
 import { getSolutionIcon } from './SolutionsIcons';
 
 /**
  * SolutionsCard Component
  * Individual solution card matching the controlling reference
  */
-export default function SolutionsCard({ solution }) {
+function SolutionsCardComponent({ solution, isActive, index }) {
   const {
     title,
     description,
@@ -25,10 +25,15 @@ export default function SolutionsCard({ solution }) {
     '--sol-icon-border': iconBorder,
     '--sol-icon-glow': iconGlow,
     '--sol-glow': iconGlow,
+    '--card-idx': index ?? 0,
   };
 
   return (
-    <div className="solution-card animate-fade-in" style={cardStyle}>
+    <article
+      className={`solution-card animate-fade-in ${isActive ? 'mobile-active' : ''}`}
+      style={cardStyle}
+      aria-label={title}
+    >
       {/* 1. Circular Icon Container */}
       <div className="solution-card-icon-container" aria-hidden="true">
         {getSolutionIcon(icon, accentColor)}
@@ -44,11 +49,14 @@ export default function SolutionsCard({ solution }) {
           alt={title}
           className="solution-card-img"
           loading="lazy"
+          decoding="async"
         />
       </div>
 
       {/* 4. Description */}
       <p className="solution-card-description">{description}</p>
-    </div>
+    </article>
   );
 }
+
+export default memo(SolutionsCardComponent);
