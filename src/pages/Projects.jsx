@@ -18,7 +18,7 @@ import {
 } from '../components/ProjectsIcons';
 import { WhatsappFilledIcon } from '../components/Icons';
 import { HERO_TRUST_METRICS, PARTNERS_DATA, PROJECTS_SHOWCASE_DATA } from '../data/projectsData';
-import homeBg from '../assets/images/home-bg.png';
+import homeBg from '../assets/images/home-bg.webp';
 import nayaraLogo from '../assets/images/nayara-logo.png';
 import hpLogo from '../assets/images/hp-logo.png';
 

@@ -3,7 +3,7 @@ import SystemSpecification from './SystemSpecification';
 import InfoStrip from './InfoStrip';
 import HeroSolar3D from './HeroSolar3D';
 import { WhatsappFilledIcon } from './Icons';
-import homeBg from '../assets/images/home-bg.png';
+import homeBg from '../assets/images/home-bg.webp';
 import { handleNavClick } from '../utils/navigation';
 
 export default function Hero() {

@@ -1,7 +1,7 @@
-﻿import residentialImg from '../assets/images/solution-residential.jpg';
-import commercialImg from '../assets/images/solution-commercial.jpg';
-import industrialImg from '../assets/images/solution-industrial.jpg';
-import agriculturalImg from '../assets/images/solution-agricultural.jpg';
+import residentialImg from '../assets/images/solution-residential.webp';
+import commercialImg from '../assets/images/solution-commercial.webp';
+import industrialImg from '../assets/images/solution-industrial.webp';
+import agriculturalImg from '../assets/images/solution-agricultural.webp';
 
 export const SOLUTIONS_DATA = [
   {

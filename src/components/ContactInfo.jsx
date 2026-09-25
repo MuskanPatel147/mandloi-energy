@@ -1,5 +1,6 @@
 import React from 'react';
 import { PhoneIcon, WhatsappIcon, MailIcon, GlobeIcon, InstagramIcon } from './Icons';
+import { LocationPinIcon } from './ProjectsIcons';
 
 export default function ContactInfo() {
   return (
@@ -7,7 +8,7 @@ export default function ContactInfo() {
       {/* Header */}
       <div className="contact-info-header">
         <span className="contact-info-badge">DIRECT COMMUNICATION</span>
-        <h2 className="contact-info-title">Get In Touch</h2>
+        <h3 className="contact-info-title">Get In Touch</h3>
         <p className="contact-info-description">
           Connect directly with our solar consultation and technical team for inquiries, site assessments, subsidy assistance, or turnkey system installations.
         </p>
@@ -100,6 +101,26 @@ export default function ContactInfo() {
             <span className="contact-info-value">Mandloi Energy</span>
           </div>
         </a>
+
+        {/* 6. Office Address */}
+        <div
+          className="contact-info-card"
+          role="listitem"
+          aria-label="Office Address: Patel House, 325, Near Bhawarkua, Vishnupuri Nx Colony, Vishnu Puri Colony, Indore, Madhya Pradesh 452001, India"
+        >
+          <div className="contact-info-icon-box location-icon-box" aria-hidden="true">
+            <LocationPinIcon size={20} color="#38bdf8" />
+          </div>
+          <div className="contact-info-text-group">
+            <span className="contact-info-label">OFFICE ADDRESS</span>
+            <span className="contact-info-value" style={{ lineHeight: '1.45', fontWeight: '500', fontSize: '0.875rem' }}>
+              Patel House, 325,<br />
+              Near Bhawarkua,<br />
+              Vishnupuri Nx Colony, Vishnu Puri Colony,<br />
+              Indore, Madhya Pradesh 452001, India
+            </span>
+          </div>
+        </div>
       </div>
 
       {/* Assurance Note */}

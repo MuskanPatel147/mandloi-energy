@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import mandloiLogo from '../assets/logo/mandloi-logo.png';
+import mandloiLogo from '../assets/logo/mandloi-logo.webp';
 import { PhoneIcon, WhatsappIcon, MailIcon, GlobeIcon } from './Icons';
 import { handleNavClick } from '../utils/navigation';
 
@@ -88,7 +88,7 @@ export default function Footer() {
 
           {/* Column 2: Quick Links */}
           <div className="footer-col footer-col-links anim-col-2">
-            <h2 className="footer-col-title">QUICK LINKS</h2>
+            <div className="footer-col-title">QUICK LINKS</div>
             <ul className="footer-nav-list">
               {FOOTER_NAV_LINKS.map((link) => (
                 <li key={link.id} className="footer-nav-item">
@@ -107,7 +107,7 @@ export default function Footer() {
 
           {/* Column 3: Services */}
           <div className="footer-col footer-col-solutions anim-col-3">
-            <h2 className="footer-col-title">SERVICES</h2>
+            <div className="footer-col-title">SERVICES</div>
             <ul className="footer-services-list">
               {APPROVED_SOLUTIONS.map((service) => (
                 <li key={service} className="footer-service-item">
@@ -126,7 +126,7 @@ export default function Footer() {
 
           {/* Column 4: Contact Info */}
           <div className="footer-col footer-col-contact anim-col-4">
-            <h2 className="footer-col-title">CONTACT US</h2>
+            <div className="footer-col-title">CONTACT US</div>
             <div className="footer-contact-list">
               <a href="tel:+919669555550" className="footer-contact-item">
                 <div className="footer-contact-icon-box" aria-hidden="true">

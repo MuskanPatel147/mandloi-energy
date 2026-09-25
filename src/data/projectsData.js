@@ -1,6 +1,6 @@
-import resImg from '../assets/images/residential-project.jpg';
-import indImg from '../assets/images/industrial-project.jpg';
-import comImg from '../assets/images/cold-storage-project.jpg';
+import resImg from '../assets/images/residential-project.webp';
+import indImg from '../assets/images/industrial-project.webp';
+import comImg from '../assets/images/cold-storage-project.webp';
 
 export const HERO_TRUST_METRICS = [
   { id: 'quality', label: 'Quality Assured', iconType: 'shield' },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TopBar from './TopBar';
-import mandloiLogo from '../assets/logo/mandloi-logo.png';
+import mandloiLogo from '../assets/logo/mandloi-logo.webp';
 import { handleNavClick } from '../utils/navigation';
 
 const NAV_LINKS = [

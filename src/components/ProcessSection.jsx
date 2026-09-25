@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PROCESS_STEPS } from '../data/processData';
 import { getProcessIcon } from './ProcessIcons';
-import mandloiLogo from '../assets/logo/mandloi-logo.png';
+import mandloiLogo from '../assets/logo/mandloi-logo.webp';
 
 /**
  * ProcessSection Component (How It Works / Our Process)

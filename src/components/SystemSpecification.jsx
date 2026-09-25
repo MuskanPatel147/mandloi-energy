@@ -30,7 +30,7 @@ export default function SystemSpecification() {
   return (
     <aside className="spec-card" aria-label="System Specification">
       <div className="spec-card-header">
-        <h2 className="spec-card-title">SYSTEM SPECIFICATION</h2>
+        <h3 className="spec-card-title">SYSTEM SPECIFICATION</h3>
         <span className="spec-card-badge">SOLAR SOLUTIONS</span>
       </div>
 

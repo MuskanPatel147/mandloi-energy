@@ -86,9 +86,9 @@ export default function MobileDesktopNotice() {
         </div>
 
         {/* Title */}
-        <h2 className="mobile-notice-title" id="mobile-notice-title">
+        <div className="mobile-notice-title" id="mobile-notice-title">
           BEST VIEWED ON DESKTOP
-        </h2>
+        </div>
 
         {/* Subtitle / Description */}
         <p className="mobile-notice-desc">

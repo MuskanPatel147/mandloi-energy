@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import SolutionsCard from './SolutionsCard';
 import { SOLUTIONS_DATA } from '../data/solutionsData';
 import { DownArrowIcon } from './SolutionsIcons';
-import homeBgImage from '../assets/images/home-bg.png';
+import homeBgImage from '../assets/images/home-bg.webp';
 
 /**
  * Solutions Component

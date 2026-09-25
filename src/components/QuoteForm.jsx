@@ -172,9 +172,9 @@ export default function QuoteForm() {
   return (
     <div className="contact-quote-form-card animate-fade-in">
       <div className="contact-form-header">
-        <h2 className="contact-form-title">
+        <h3 className="contact-form-title">
           Book a <span className="highlight-orange">FREE</span> Solar Consultation
-        </h2>
+        </h3>
         <p className="contact-form-subtitle">
           Save up to <span className="highlight-cyan">₹78,000</span> with Government Subsidy
         </p>

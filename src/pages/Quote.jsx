@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { HexSolarIcon, HexSavingsIcon, HexSupportIcon, LockIcon, CheckCircleIcon } from '../components/QuoteIcons';
 import { WhatsappFilledIcon } from '../components/Icons';
-import homeBg from '../assets/images/home-bg.png';
+import homeBg from '../assets/images/home-bg.webp';
 
 const BILL_RANGES = [
   'Less than ₹1500',

@@ -67,10 +67,10 @@ export default function AboutSection() {
               <span className="about-badge-line" aria-hidden="true" />
             </div>
 
-            <h1 className="about-heading" id="about-title">
+            <h2 className="about-heading" id="about-title">
               <span className="about-heading-line1">POWERING TODAY,</span>
               <span className="about-heading-line2">SUSTAINING TOMORROW</span>
-            </h1>
+            </h2>
 
             <div className="about-divider-bar" aria-hidden="true" />
 
